@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="fade in" id="login-modal" tabindex="-1"
+         role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Увійти до кабінету</h1><br>
+                {% if error %}
+                    <div class="alert alert-warning">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+                <form action="{{ path('login') }}" method="post">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Логін"/>
+                    <input type="password" id="password" name="_password" placeholder="Пароль"/>
+                    <input type="hidden" name="_target_path" value="{{ path('app.contract.create') }}" />
+                    <input type="submit" name="login" class="login loginmodal-submit" value="Вхід">
+                </form>
+            </div>
+        </div>
+    </div>
+
+        {#
+            If you want to control the URL the user
+            is redirected to on success (more details below)
+            <input type="hidden" name="_target_path" value="/account" />
+        #}
+
+{% endblock %}
